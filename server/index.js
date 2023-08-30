@@ -16,7 +16,7 @@ var app = express()
 
 var allowedOrigins = ['http://someorigin.com',
                       'http://localhost:3001',
-                      'https://frontends-0n02.onrender.com/',
+                      'https://frontends-0n02.onrender.com',
                       'http://localhost:1234',
                       'http://localhost:3000'];
 
@@ -54,12 +54,12 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
-// app.use(cors((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//   next();
-// }));
+ app.use(cors((req, res, next) => {
+   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+ }));
 
  // Define routes
 //  app.use('/' , require('./routes/pages'))
