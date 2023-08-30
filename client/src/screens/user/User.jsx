@@ -52,7 +52,9 @@ const User = () => {
   useEffect(() => {
     try {
       setLoad(true);
-      axios.get(`/OUVRIER/GET_ALL/${user}`).then((result) => {
+      axios.get(`/OUVRIER/GET_ALL/${user}`, {
+  mode: 'no-cors' // 'cors' by default
+}).then((result) => {
         setLoad(false);
         console.log(result.data);
         setDATA(result.data);
