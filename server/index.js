@@ -12,32 +12,39 @@ require('dotenv').config();
 var app = express()
 // read secret key
 
-var allowedOrigins = ['http://someorigin.com', 
-                      'http://localhost:3001', 
-                      'https://frontends-0n02.onrender.com',
-                      'http://localhost:1234', 
-                      'http://localhost:3000']; 
 
-app.use(cors({ 
- origin: function(origin, callback){ 
- // allow requests with no origin // 
- (like mobile apps or curl requests) 
-  if(!origin) 
-   return callback(null, true); 
- if(allowedOrigins.indexOf(origin) === -1){ 
-  var msg = 'The CORS policy for this site does not ' + 
-   'allow access from the specified Origin.'; 
-  return callback(new Error(msg), false); } return callback(null, true); }, 
- exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'], credentials: true, }
-            
-            ));
+
+var allowedOrigins = ['http://someorigin.com',
+                      'http://localhost:3001',
+                      'http://localhost:1234',
+                      'http://localhost:3000'];
+
+app.use(cors({
+
+  origin: function(origin, callback){
+    // allow requests with no origin
+    // (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+
+  exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
+
+  credentials: true,
+}));
+
 
 
 // pour toutes les cors
 // app.use(cors())
 
 app.use(cookieParser())
-const port = 3001
+const PORT = process.env.PORT || 3001
 // Define dossier public
 //const publicDirectory = path.join(__dirname, './public')
 //app.use(express.static(publicDirectory))
@@ -46,6 +53,12 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
+// app.use(cors((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//   next();
+// }));
 
  // Define routes
 //  app.use('/' , require('./routes/pages'))
@@ -71,6 +84,6 @@ app.use(express.json())
   })
  })
 
- app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+ app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
 })
