@@ -28,7 +28,7 @@ function App() {
   return (
       <BrowserRouter>
           <Routes>
-            <Route  path="/dash" element={<Dash/>} /> 
+            <Route  path="/" element={<Dash/>} /> 
             <Route  path="/user" element={<User/>} />
             <Route  path="/adduser" element={<Adduser/>} />
             <Route  path="/edituser" element={<Edituser/>} />
