@@ -12,12 +12,13 @@ import axios from "axios";
    
 //         request.headers.Authorization = 'Bearer '+accountService.GetTokenCookies()
 
-//     return request
+//     return request    https://servers-7ssr.onrender.com/
    
 // })
 
 const Axios = axios.create({
-        baseURL : 'http://localhost:3001' ,
+        // baseURL : 'http://localhost:3001' ,
+        baseURL : 'http://https://servers-7ssr.onrender.com/' ,
     })
     
 Axios.defaults.withCredentials = true
