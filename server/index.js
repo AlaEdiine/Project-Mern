@@ -46,10 +46,6 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
- app.use(cors((req, res, next) => {
-res.set('Access-Control-Allow-Origin', '*');
-  next();
- }));
 
  // Define routes
 //  app.use('/' , require('./routes/pages'))
