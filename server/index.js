@@ -16,6 +16,7 @@ var app = express()
 
 var allowedOrigins = ['http://someorigin.com',
                       'http://localhost:3001',
+                      'https://frontends-0n02.onrender.com/'
                       'http://localhost:1234',
                       'http://localhost:3000'];
 
