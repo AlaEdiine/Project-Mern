@@ -11,8 +11,25 @@ var cors = require('cors')  // api json
 require('dotenv').config();
 var app = express()
 // read secret key
+var allowedOrigins = ['http://someorigin.com', 
+                      'http://localhost:3001', 
+                      'https://frontends-0n02.onrender.com',
+                      'http://localhost:1234', 
+                      'http://localhost:3000']; 
 
-
+app.use(cors({ 
+ origin: function(origin, callback){ 
+ // allow requests with no origin // 
+ (like mobile apps or curl requests) 
+  if(!origin) 
+   return callback(null, true); 
+ if(allowedOrigins.indexOf(origin) === -1){ 
+  var msg = 'The CORS policy for this site does not ' + 
+   'allow access from the specified Origin.'; 
+  return callback(new Error(msg), false); } return callback(null, true); }, 
+ exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'], credentials: true, }
+            
+            ));
 
 
 
@@ -30,9 +47,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
  app.use(cors((req, res, next) => {
-   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+res.set('Access-Control-Allow-Origin', '*');
   next();
  }));
 
